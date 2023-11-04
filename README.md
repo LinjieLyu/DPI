@@ -67,6 +67,8 @@ Material Refinement:
 ```python
 material_optimization.py --task_config=configs/raytracing_config_outdoor.yaml; 
 ```
+![image info](./figures/hotdog_env.png)
+
 ## Differentiable Renderer Plug-in 
 
 If you want to generate natural environment maps with another differentiable rendering method instead of Mitsuba3, it's easy. Just replace the rendering and update_material functions in ./guided_diffusion/measurements.py.
@@ -82,4 +84,5 @@ number={6},
 year={2023}
 }
 ```
-
+## Acknowledgments
+This code is based on the [DPS](https://github.com/DPS2022/diffusion-posterior-sampling), and skylibs codebases.
