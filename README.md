@@ -71,9 +71,10 @@ material_optimization.py --task_config=configs/raytracing_config_outdoor.yaml;
 ```
 ![image info](./figures/hotdog_env.png)
 
+For indoor scenes, use indoor configs. Usually the **illumi_scale** hyperparameter for indoor config is 1.0 - 10.0.
 ## Differentiable Renderer Plug-in 
 
-If you want to generate natural environment maps with another differentiable rendering method instead of Mitsuba3, it's easy. Just replace the rendering and update_material functions in ./guided_diffusion/measurements.py.
+If you want to generate natural environment maps with another differentiable rendering method instead of Mitsuba3, it's easy. Just replace the **rendering (forward)** and **update_material** functions in ./guided_diffusion/measurements.py.
 
 ## Citation
 ```python

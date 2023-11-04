@@ -1,9 +1,9 @@
 conditioning:
   method:  rt-ps+ #ps+ #
   params:
-    scales: [0.1,1.0]
-    scale_method: step
-    use_log: true
+    scales: [1.0,0.2]
+    scale_method: linear
+    use_log: false
     
 data:
   name: ffhq
@@ -11,17 +11,17 @@ data:
 
 measurement:
   operator:
-    name: raytracing-
-    scene_name: 
-    image_path: 
+    name: raytracing-hotdog-hdr
+    scene_name: hotdog
+    image_path: ./data/hotdog/images
     ldr: false
     n_images: 60
     
-    scene_path: 
-    camera_path: 
-    illumi_gamma: 6.0
-    illumi_scale: 10.0
-    illumi_normalize: 0.9
+    scene_path: ./data/hotdog/hotdog_synthetic.xml
+    camera_path: ./data/hotdog/camera.xml
+    illumi_gamma: 2.4
+    illumi_scale: 1.0
+    illumi_normalize: 0.5
     texture_res: 256
     
   noise: 
