@@ -85,4 +85,4 @@ year={2023}
 }
 ```
 ## Acknowledgments
-This code is based on the [DPS](https://github.com/DPS2022/diffusion-posterior-sampling), and skylibs codebases.
+This code is based on the [DPS](https://github.com/DPS2022/diffusion-posterior-sampling), and [guided-diffusion](https://github.com/openai/guided-diffusion) codebases.
