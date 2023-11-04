@@ -47,6 +47,8 @@ For real-world scenes, you can use a [neural SDF reconstruction](https://github.
 
 Some camera-reader code is provided in [camera](./data/camera). You can always load cameras to Blender and then export a camera.xml with the useful [Mitsuba Blender Add-on](https://github.com/mitsuba-renderer/mitsuba-blender).
 
+For more details take a look at [Mitsuba 3](https://mitsuba.readthedocs.io/en/latest/) document.
+
 ## Training DDPM Model
 ```python
 mkdir models
