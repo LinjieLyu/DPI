@@ -1,6 +1,6 @@
 # Diffusion Posterior Illumination for Ambiguity-aware Inverse Rendering 
 
-Official implementation of [Diffusion Posterior Illumination for Ambiguity-aware Inverse Rendering ](https://vcai.mpi-inf.mpg.de/projects/2023-DPE/).
+Pytorch implementation of [Diffusion Posterior Illumination for Ambiguity-aware Inverse Rendering ](https://vcai.mpi-inf.mpg.de/projects/2023-DPE/).
 
 ACM Transactions on Graphics (Proceedings of SIGGRAPH Asia), 2023
 
