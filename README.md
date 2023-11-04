@@ -10,6 +10,7 @@ ACM Transactions on Graphics (Proceedings of SIGGRAPH Asia), 2023
  [Shunsuke Saito](https://shunsukesaito.github.io/)<sup>3</sup>,
  [Michael Zollhöfer](https://zollhoefer.com/)<sup>3</sup>,
  [Thomas Leimkühler](https://people.mpi-inf.mpg.de/~tleimkue/)<sup>1</sup>,
+and 
  [Christian Theobalt](https://people.mpi-inf.mpg.de/~theobalt/)<sup>1</sup>
  
  
