@@ -1,0 +1,29 @@
+conditioning:
+  method:  rt-ps+ #ps+ #
+  params:
+    scales: [1.0,0.2]
+    scale_method: linear
+    use_log: false
+    
+data:
+  name: ffhq
+  root: ./data/streetlearn  
+
+measurement:
+  operator:
+    name: raytracing-hotdog-hdr
+    scene_name: hotdog
+    image_path: ./data/hotdog/images
+    ldr: false
+    n_images: 60
+    
+    scene_path: ./data/hotdog/hotdog_synthetic.xml
+    camera_path: ./data/hotdog/camera.xml
+    illumi_gamma: 2.4
+    illumi_scale: 1.0
+    illumi_normalize: 0.5
+    texture_res: 256
+    
+  noise: 
+    name: gaussian
+    sigma: 0.05

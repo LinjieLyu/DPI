@@ -1,0 +1,255 @@
+<scene version="3.0.0">
+
+<!-- Defaults, these can be set via the command line: -Darg=value -->
+
+	<default name="spp" value="16"/>
+	<default name="resx" value="512"/>
+	<default name="resy" value="512"/>
+	<default name="max_depth" value="4"/>
+	<default name="pixel_format" value="rgb"/>
+
+<!-- Camera and Rendering Parameters -->
+
+	<integrator type="prb">
+		<integer name="max_depth" value="$max_depth"/>
+		<boolean name="hide_emitters" value="true"/>
+	</integrator>
+
+	<sensor type="perspective">
+		<float name="fov" value="39"/>
+		<transform name="to_world">
+			<lookat origin="-1.2, 0.5, 1.2"
+                    target="0.4, 0.45, 0.5"
+                    up="0, 1, 0"/>
+		</transform>
+
+		<sampler type="independent">
+		    <integer name="sample_count" value="$spp"/>
+        </sampler>
+
+        <film type="hdrfilm">
+            <integer name="width" value="$resx"/>
+            <integer name="height" value="$resy"/>
+            <string name="pixel_format" value="$pixel_format"/>
+            <rfilter type="gaussian"/>
+        </film>
+	</sensor>
+	<emitter type="envmap">
+		<string name="filename" value="env_19.exr" />
+		<float name="scale" value="2"/>
+	</emitter>
+
+<!-- Materials -->
+
+	<bsdf type="twosided" id="mat-Pan1">
+		<bsdf type="principled">
+			<texture type="bitmap" name="base_color">
+				<string name="filename" value="textures/Pan1PaintTexture.png"/>
+			</texture>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.800000"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.173205"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
+	<bsdf type="twosided" id="mat-Pan2">
+		<bsdf type="principled">
+			<texture type="bitmap" name="base_color">
+				<string name="filename" value="textures/Pan2TexturePaint.png"/>
+			</texture>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.800000"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.173205"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
+	<bsdf type="diffuse" id="mat-Salchicha">
+		<rgb value="1.000000 0.600000 0.400000" name="reflectance"/>
+	</bsdf>
+	<bsdf type="twosided" id="mat-Material.001">
+		<bsdf type="principled">
+			<rgb value="0.800000 0.515872 0.043681" name="base_color"/>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.208333"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.173205"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
+	<bsdf type="twosided" id="mat-Mayonesa">
+		<bsdf type="principled">
+			<rgb value="1.000000 0.747158 0.197200" name="base_color"/>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.208333"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.173205"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
+	<bsdf type="twosided" id="mat-Material">
+		<bsdf type="principled">
+			<rgb value="0.800000 0.487193 0.248353" name="base_color"/>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.118182"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.173205"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
+	<bsdf type="twosided" id="mat-Salsa">
+		<bsdf type="principled">
+			<rgb value="0.175825 0.012654 0.002614" name="base_color"/>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.166667"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.173205"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
+	<bsdf type="twosided" id="mat-Chipotle">
+		<bsdf type="principled">
+			<rgb value="0.799998 0.345516 0.090210" name="base_color"/>
+			<float name="spec_tint" value="0.000000"/>
+			<float name="spec_trans" value="0.000000"/>
+			<float name="metallic" value="0.000000"/>
+			<float name="anisotropic" value="0.000000"/>
+			<float name="roughness" value="0.166667"/>
+			<float name="sheen" value="0.000000"/>
+			<float name="sheen_tint" value="0.500000"/>
+			<float name="clearcoat" value="0.000000"/>
+			<float name="clearcoat_gloss" value="0.173205"/>
+			<float name="specular" value="0.500000"/>
+		</bsdf>
+	</bsdf>
+
+
+
+	
+
+<!-- Shapes -->
+
+	<shape type="obj">
+		<string name="filename" value="meshes/Pan1.obj"/>
+		<ref id="mat-Pan1" name="bsdf"/>
+	</shape>
+	<shape type="obj">
+		<string name="filename" value="meshes/Pan2.obj"/>
+		<ref id="mat-Pan2" name="bsdf"/>
+	</shape>
+	<shape type="obj">
+		<string name="filename" value="meshes/Salchicha.obj"/>
+		<ref id="mat-Salchicha" name="bsdf"/>
+	</shape>
+	<shape type="obj">
+		<string name="filename" value="meshes/Mostaza.obj"/>
+		<ref id="mat-Material.001" name="bsdf"/>
+	</shape>
+	<shape type="obj">
+		<string name="filename" value="meshes/Mayonesa.obj"/>
+		<ref id="mat-Mayonesa" name="bsdf"/>
+	</shape>
+	<shape type="ply">
+		<string name="filename" value="meshes/Cylinder.ply"/>
+		<ref id="mat-Material" name="bsdf"/>
+	</shape>
+	<shape type="ply">
+		<string name="filename" value="meshes/Sphere.ply"/>
+		<ref id="mat-Salsa" name="bsdf"/>
+	</shape>
+	<shape type="ply">
+		<string name="filename" value="meshes/Sphere_001.ply"/>
+		<ref id="mat-Chipotle" name="bsdf"/>
+	</shape>
+	<shape type="shapegroup" id="mesh-Pan1">
+		<shape type="ply">
+			<string name="filename" value="meshes/Pan1.ply"/>
+			<ref id="mat-Pan1" name="bsdf"/>
+		</shape>
+	</shape>
+	<shape type="instance">
+		<ref id="mesh-Pan1" name="shape"/>
+		<transform name="to_world">
+			<matrix value="-4.095307 0.000006 -3.331346 0.304215 -3.327546 -0.252090 4.090636 0.019497 -0.159074 5.273127 0.195563 -0.168631 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</shape>
+	<shape type="shapegroup" id="mesh-Pan2">
+		<shape type="ply">
+			<string name="filename" value="meshes/Pan2.ply"/>
+			<ref id="mat-Pan2" name="bsdf"/>
+		</shape>
+	</shape>
+	<shape type="instance">
+		<ref id="mesh-Pan2" name="shape"/>
+		<transform name="to_world">
+			<matrix value="-5.130663 0.000005 1.243263 0.556758 1.241845 -0.252090 5.124811 0.024121 0.059373 5.273127 0.244998 -0.128791 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</shape>
+	<shape type="shapegroup" id="mesh-Salchicha">
+		<shape type="ply">
+			<string name="filename" value="meshes/Salchicha.ply"/>
+			<ref id="mat-Salchicha" name="bsdf"/>
+		</shape>
+	</shape>
+	<shape type="instance">
+		<ref id="mesh-Salchicha" name="shape"/>
+		<transform name="to_world">
+			<matrix value="-3.962369 0.378805 -0.000004 0.371558 0.378373 3.957850 0.190073 0.117021 0.018093 0.189210 -3.975893 0.327094 0.000000 0.000000 0.000000 1.000000"/>
+		</transform>
+	</shape>
+	<shape type="shapegroup" id="mesh-Mostaza">
+		<shape type="ply">
+			<string name="filename" value="meshes/Mostaza.ply"/>
+			<ref id="mat-Material.001" name="bsdf"/>
+		</shape>
+	</shape>
+	
+	<shape type="ply">
+		<string name="filename" value="meshes/Mostaza_001.ply"/>
+		<ref id="mat-Material.001" name="bsdf"/>
+	</shape>
+	
+	<shape type="shapegroup" id="mesh-Mayonesa">
+		<shape type="ply">
+			<string name="filename" value="meshes/Mayonesa.ply"/>
+			<ref id="mat-Mayonesa" name="bsdf"/>
+		</shape>
+	</shape>
+	
+	<shape type="ply">
+		<string name="filename" value="meshes/Mayonesa_001.ply"/>
+		<ref id="mat-Mayonesa" name="bsdf"/>
+	</shape>
+	
+</scene>

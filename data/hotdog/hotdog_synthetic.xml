@@ -1,0 +1,69 @@
+<scene version="3.0.0">
+
+<!-- Defaults, these can be set via the command line: -Darg=value -->
+
+	<default name="spp" value="16"/>
+	<default name="resx" value="512"/>
+	<default name="resy" value="512"/>
+	<default name="max_depth" value="4"/>
+	<default name="pixel_format" value="rgb"/>
+	
+<!-- Camera and Rendering Parameters -->
+
+	<integrator type="prb">
+		<integer name="max_depth" value="$max_depth"/>
+		<boolean name="hide_emitters" value="true"/>
+	</integrator>
+	
+	<emitter type="envmap">
+		<string name="filename" value="env_19.exr" />
+		<float name="scale" value="2"/>
+	</emitter>
+	
+	<sensor type="perspective">
+		<float name="fov" value="39"/>
+		<transform name="to_world">
+			<lookat origin="-1.2, 0.5, 1.2"
+                    target="0.4, 0.45, 0.5"
+                    up="0, 1, 0"/>
+		</transform>
+
+		<sampler type="multijitter">
+		    <integer name="sample_count" value="$spp"/>
+        </sampler>
+
+        <film type="hdrfilm">
+            <integer name="width" value="$resx"/>
+            <integer name="height" value="$resy"/>
+            <string name="pixel_format" value="$pixel_format"/>
+            <rfilter type="gaussian"/>
+        </film>
+	</sensor>
+	
+	
+
+<!-- Materials -->
+
+	<shape type="obj">
+		<string name="filename" value="meshes/hotdog.obj"/>
+		<boolean name="face_normals" value="true"/>
+		<bsdf type="principled">
+			<texture type="bitmap" name="base_color">
+				<string name="filename" value="textures/basecolor.exr"/>
+			</texture>
+			<texture type="bitmap" name="metallic">
+				<string name="filename" value="textures/metallic.exr"/>
+			</texture>
+			<texture type="bitmap" name="roughness">
+				<string name="filename" value="textures/roughness.exr"/>
+			</texture>
+			<float name="specular" value="0.5" />	
+			<float name="spec_tint" value="0." />
+			<float name="anisotropic" value="0." />
+			<float name="sheen" value="0." />
+			<float name="sheen_tint" value="0." />
+			<float name="clearcoat" value="0." />
+			<float name="spec_trans" value="0." />
+		</bsdf>
+	</shape>
+</scene>
