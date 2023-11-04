@@ -22,9 +22,55 @@ ACM Transactions on Graphics (Proceedings of SIGGRAPH Asia), 2023
 
 ```python
 pip install -r requirements.txt
-
 pip install torch==1.11.0+cu113 torchvision==0.12.0+cu113 torchaudio==0.11.0 --extra-index-url https://download.pytorch.org/whl/cu113
+pip install mitsuba
 ```
+
+## Data Preparation
+See [hotdog](./data/hotdog) for references.
+
+```
+image/
+    0.exr or .png
+    1.exr or .png
+    ...
+
+scene.xml
+camera.xml
+```
+## How to prepare your Mitsuba file?
+**Geometry**
+
+For real-world scenes, you can use a [neural SDF reconstruction](https://github.com/bennyguo/instant-nsr-pl) method to extract the mesh for Mitsuba xml file.
+
+**Camera**
+
+Some camera-reader code is provided in [camera](./data/camera). You can always load cameras to Blender and then export a camera.xml with the useful [Mitsuba Blender Add-on](https://github.com/mitsuba-renderer/mitsuba-blender).
+
+## Training DDPM Model
+```python
+mkdir models
+```
+We use [Laval](http://www.hdrdb.com/) and [Streetlearn](https://sites.google.com/view/streetlearn/) as environment map datasets. Refer to [guided-diffusion](https://github.com/openai/guided-diffusion) for training details or download pre-trained [checkpoints](https://drive.google.com/drive/folders/1c0wtEafQN7ShzdfPbJaetCKv4h7_oSXs?usp=sharing) to ./models/. 
+
+## Run Optimization
+Here is an example to sample realistic outdoor environment maps take [hotdog](./data/hotdog) as input.
+
+Environment Map Sampling:
+```python
+python sample_condition.py \
+--model_config=configs/model_config_outdoor.yaml \
+--diffusion_config=configs/diffusion_config.yaml \
+--task_config=raytracing_config_outdoor.yaml;
+```
+Material Refinement:
+```python
+material_optimization.py --task_config=configs/raytracing_config_outdoor.yaml; 
+```
+## Differentiable Renderer Plug-in 
+
+If you want to generate natural environment maps with another differentiable rendering method instead of Mitsuba3, it's easy. Just replace the rendering and update_material functions in ./guided_diffusion/measurements.py.
+
 ## Citation
 ```python
 @article{lyu2023dpi,
@@ -36,3 +82,4 @@ number={6},
 year={2023}
 }
 ```
+
