@@ -9,10 +9,10 @@ from functools import partial
 import yaml
 from torch.nn import functional as F
 from torchvision import torch
-from motionblur.motionblur import Kernel
+
 
 from util.resizer import Resizer
-from util.img_utils import Blurkernel, fft2_m,imread
+from util.img_utils import fft2_m,imread
 
 import numpy as np
 import random
@@ -85,87 +85,6 @@ class DenoiseOperator(LinearOperator):
     def project(self, data):
         return data
 
-
-@register_operator(name='super_resolution')
-class SuperResolutionOperator(LinearOperator):
-    def __init__(self, in_shape, scale_factor, device):
-        self.device = device
-        self.up_sample = partial(F.interpolate, scale_factor=scale_factor)
-        self.down_sample = Resizer(in_shape, 1/scale_factor).to(device)
-
-    def forward(self, data, **kwargs):
-        return self.down_sample(data)
-
-    def transpose(self, data, **kwargs):
-        return self.up_sample(data)
-
-    def project(self, data, measurement, **kwargs):
-        return data - self.transpose(self.forward(data)) + self.transpose(measurement)
-
-@register_operator(name='motion_blur')
-class MotionBlurOperator(LinearOperator):
-    def __init__(self, kernel_size, intensity, device):
-        self.device = device
-        self.kernel_size = kernel_size
-        self.conv = Blurkernel(blur_type='motion',
-                               kernel_size=kernel_size,
-                               std=intensity,
-                               device=device).to(device)  # should we keep this device term?
-
-        self.kernel = Kernel(size=(kernel_size, kernel_size), intensity=intensity)
-        kernel = torch.tensor(self.kernel.kernelMatrix, dtype=torch.float32)
-        self.conv.update_weights(kernel)
-    
-    def forward(self, data, **kwargs):
-        # A^T * A 
-        return self.conv(data)
-
-    def transpose(self, data, **kwargs):
-        return data
-
-    def get_kernel(self):
-        kernel = self.kernel.kernelMatrix.type(torch.float32).to(self.device)
-        return kernel.view(1, 1, self.kernel_size, self.kernel_size)
-
-
-@register_operator(name='gaussian_blur')
-class GaussialBlurOperator(LinearOperator):
-    def __init__(self, kernel_size, intensity, device):
-        self.device = device
-        self.kernel_size = kernel_size
-        self.conv = Blurkernel(blur_type='gaussian',
-                               kernel_size=kernel_size,
-                               std=intensity,
-                               device=device).to(device)
-        self.kernel = self.conv.get_kernel()
-        self.conv.update_weights(self.kernel.type(torch.float32))
-
-    def forward(self, data, **kwargs):
-        return self.conv(data)
-
-    def transpose(self, data, **kwargs):
-        return data
-
-    def get_kernel(self):
-        return self.kernel.view(1, 1, self.kernel_size, self.kernel_size)
-
-@register_operator(name='inpainting')
-class InpaintingOperator(LinearOperator):
-    '''This operator get pre-defined mask and return masked image.'''
-    def __init__(self, device):
-        self.device = device
-    
-    def forward(self, data, **kwargs):
-        try:
-            return data * kwargs.get('mask', None).to(self.device)
-        except:
-            raise ValueError("Require mask")
-    
-    def transpose(self, data, **kwargs):
-        return data
-    
-    def ortho_project(self, data, **kwargs):
-        return data - self.forward(data, **kwargs)
 
 
 class NonLinearOperator(ABC):
